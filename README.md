@@ -2,7 +2,7 @@
 
 This repository contains materials to reproduce the results of the manuscript:
 
-Miranda, M.L., Basellini, U., Acosta, E., Rau, R. & Zagheni, E. How period life expectancy can distort our interpretation of mortality crises. MP Working Paper XXXX.
+Miranda, M.L., Basellini, U., Acosta, E., Rau, R. & Zagheni, E. How period life expectancy can distort our interpretation of mortality crises.
 
 
 ### Structure
