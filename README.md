@@ -1,8 +1,8 @@
-# How period life expectancy can distort our interpretation of mortality crises
+# Evaluating the Impact of Mortality Crises on Life Expectancy: Period and Cohort Perspectives
 
 This repository contains materials to reproduce the results of the manuscript:
 
-Miranda, M.L., Basellini, U., Acosta, E., Rau, R. & Zagheni, E. How period life expectancy can distort our interpretation of mortality crises.
+Miranda, M.L., Basellini, U., Acosta, E., Rau, R. & Zagheni, E. Evaluating the Impact of Mortality Crises on Life Expectancy: Period and Cohort Perspectives
 
 
 ### Structure
