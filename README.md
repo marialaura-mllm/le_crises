@@ -2,8 +2,8 @@
 
 This repository contains materials to reproduce the results of the manuscript:
 
-Miranda, M.L., Basellini, U., Acosta, E., Rau, R. & Zagheni, E. Evaluating the Impact of Mortality Crises on Life Expectancy: Period and Cohort Perspectives
-
+Miranda, M.L., Basellini, U., Acosta, E. & Zagheni, E. Evaluating the Impact of Mortality Crises on Life Expectancy: Period and Cohort Perspectives
+The working paper can be accessed [here](https://www.demogr.mpg.de/en/publications_databases_6118/publications_1904/mpidr_working_papers/how_period_life_expectancy_can_distort_our_interpretation_of_mortality_crises_8601/)
 
 ### Structure
 
