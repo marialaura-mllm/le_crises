@@ -1,6 +1,6 @@
 
 #### Lee-Miller (2001) with simulation
-LM <- function(E, LMX, Y, a, sex, t1, tF, nS){
+LM_AA <- function(E, LMX, Y, a, sex, t1, tF, nS){
     
     n1 <- length(t1)
     nF <- length(tF)
@@ -24,6 +24,14 @@ LM <- function(E, LMX, Y, a, sex, t1, tF, nS){
     
     e0.obs.real <- apply(exp(LMX),2,lifetable.e0,x=a,sex=sex)
     
+    # Adjusting kt for the e0
+    koptim <- function(par,Alpha,Beta,e0.obs,x,sex){
+      Kappa <- par[1]
+      lmx.lc <- Alpha+Beta*Kappa
+      e0.est <- lifetable.e0(mx=exp(lmx.lc),x=a,sex=sex) #e0 adjustment
+      diff.lc <- abs(e0.obs-e0.est)
+      return(diff.lc)
+    }
     
     for (i in 1:n1){
       KappaSecStep <- optimize(f=koptim, interval=c(-150,150), Alpha=Alpha, 
@@ -34,21 +42,26 @@ LM <- function(E, LMX, Y, a, sex, t1, tF, nS){
     ## adjusting Kappa in the last period
     ## (it should be 0 for fitted e0 to match exactly the observed one)
     Kappa[n1] <- 0
+    # plot(t1,Kappa)
     
     Kts <- ts(c(Kappa), start = t1[1])
-    modK <- Arima(Kts, order=c(0,1,0), include.drift=TRUE)
-    
-    
+    modK <- auto.arima(y=Kts)
+    # plot(forecast(modK))
+    predK <- forecast(modK, h = nF)
     # Simulation of kts with bootstrapping
     #SIMe0 <- c()
     
     SIMnmx <- c()
+    E0 <- matrix(NA,nF,nS)
     for(s in 1:nS){
       kappa.sim <- simulate(modK, nsim=nF,future=TRUE, bootstrap=TRUE)
       kappa.matrix <- matrix(kappa.sim)
       
       OneF <- rep(1,nF)
       nmx <- Alpha%*%t(OneF) + Beta%*%t(kappa.matrix)
+      
+      ## life exp
+      E0[,s] <- apply(exp(nmx),2,lifetable.e0,x=a,sex=sex)
       
       ## Calculate le by horizon
       #e0 <- apply(exp(nmx),2,e0.mx,x=a,sex=sex)
@@ -58,17 +71,21 @@ LM <- function(E, LMX, Y, a, sex, t1, tF, nS){
       colnames(SIMnmx) <- tF
     }
     
-    return(SIMnmx)
+    # matplot(tF,E0,t="l",lty=1)
     
-}
-
-# Adjusting kt for the e0
-koptim <- function(par,Alpha,Beta,e0.obs,x,sex){
-  Kappa <- par[1]
-  lmx.lc <- Alpha+Beta*Kappa
-  e0.est <- lifetable.e0(mx=exp(lmx.lc),x=a,sex=sex) #e0 adjustment
-  diff.lc <- abs(e0.obs-e0.est)
-  return(diff.lc)
+    ## median e0
+    e0 <- apply(E0,1,median)
+    # plot(tF,e0)
+    
+    ## theoretical e0 (non simulation based)
+    nmx <- Alpha%*%t(OneF) + Beta%*%t(predK$mean)
+    e0.med <- apply(exp(nmx),2,lifetable.e0,x=a,sex=sex)
+    
+    ## output
+    out <- list(SIMnmx=SIMnmx,e0=e0,e0.med=e0.med)
+    
+    return(out)
+    
 }
 
 
