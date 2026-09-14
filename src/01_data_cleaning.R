@@ -1,11 +1,12 @@
 
-#'How period life expectancy can distort our interpretation of mortality crises'
+#'Evaluating the Impact of Mortality Crises on Life Expectancy: 
+#Period and Cohort Perspectives'
 # Data cleaning
 
-# This code is to be used to replicate the results of the paper "How period life
-#expectancy can distort our interpretation of mortality crises". Specifically, 
-#it can be used to obtain cleaned data using death rates from World Population 
-#prospects 2024 and Human Mortality Database.
+# This code is to be used to replicate the results of the paper "Evaluating the 
+#Impact of Mortality Crises on Life Expectancy: Period and Cohort Perspectives". 
+#Specifically, it can be used to obtain cleaned data using death rates from 
+#World Population prospects 2024 and Human Mortality Database.
 
 
 #-------------------------------------------------------------------------------

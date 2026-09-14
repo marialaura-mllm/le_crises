@@ -1,12 +1,13 @@
 
-#'How period life expectancy can distort our interpretation of mortality crises'
+#'Evaluating the Impact of Mortality Crises on Life Expectancy: 
+#Period and Cohort Perspectives'
 # Short-term effect and linear Interpolation with WPP
 
-# This code is to be used to replicate Figure S2 of the paper "How period life 
-#expectancy can distort our interpretation of mortality crises". Specifically, 
-#it can be used to obtain cohort life expectancy at birth estimates considering 
-#a linear interpolation of WPP rates and a short-term disturbance using as 
-#example the COVID-19 pandemic.
+# This code is to be used to replicate Figure S2 of the paper "Evaluating the 
+#Impact of Mortality Crises on Life Expectancy: Period and Cohort Perspectives". 
+#Specifically, it can be used to obtain cohort life expectancy at birth 
+#estimates considering a linear interpolation of WPP rates and a short-term 
+#disturbance using as example the COVID-19 pandemic.
 
 
 
@@ -17,6 +18,7 @@ rm(list=ls(all=TRUE))
 
 # Packages
 require(tidyverse)
+require(data.table)
 
 # Functions
 source("fun/functions.R")
@@ -259,12 +261,12 @@ summary_lmx <-
 write.table(summary_e0 %>% 
               rename(e0_short=e0, e0_short_baseline=e0_inter),
             row.names = F,
-            'out/e0_short_lin_int.txt')
+            'out/04_e0_short_lin_int.txt')
 
 # Death rates
 write.table(summary_lmx,
             row.names = F,
-            'out/lmx_short_lin_int.txt')
+            'out/04_lmx_short_lin_int.txt')
 
 
 
